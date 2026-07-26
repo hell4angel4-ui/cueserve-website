@@ -3,12 +3,22 @@
 import { useRef } from "react";
 import { motion, useInView } from "framer-motion";
 
+type Size = "stat" | "h2";
+
 interface StatOdometerProps {
   value: number;
   prefix?: string;
   suffix?: string;
+  size?: Size;
   className?: string;
 }
+
+// stat = 128px (hero/About numerals), h2 = 48px (Counter band, Testimonials
+// stat chips per design.md §3).
+const sizeClasses: Record<Size, string> = {
+  stat: "text-stat",
+  h2: "text-h2",
+};
 
 const DIGITS = ["0", "1", "2", "3", "4", "5", "6", "7", "8", "9"];
 
@@ -34,13 +44,20 @@ function DigitColumn({ digit, inView }: { digit: number; inView: boolean }) {
 // Odometer / slot-machine rolling digits (design.md §8) — each digit is a
 // vertical 0-9 column that scrolls to its final value on viewport entry.
 // Used for stats like "250+" and "96%".
-export function StatOdometer({ value, prefix = "", suffix = "", className = "" }: StatOdometerProps) {
+export function StatOdometer({
+  value,
+  prefix = "",
+  suffix = "",
+  size = "stat",
+  className = "",
+}: StatOdometerProps) {
   const ref = useRef<HTMLSpanElement>(null);
   const inView = useInView(ref, { once: true, margin: "-10% 0px" });
   const digits = String(value).split("").map(Number);
 
   return (
-    <span ref={ref} className={`inline-flex items-baseline text-stat text-primary ${className}`}>
+    <span ref={ref} className={`inline-flex items-baseline ${sizeClasses[size]} text-primary ${className}`}>
+
       {prefix}
       {digits.map((digit, i) => (
         <DigitColumn key={i} digit={digit} inView={inView} />
