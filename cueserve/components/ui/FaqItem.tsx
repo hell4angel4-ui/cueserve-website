@@ -14,7 +14,9 @@ interface FaqItemProps {
 // gradient card, plus/minus icon crossfade, ~350ms ease-in-out height reveal.
 export function FaqItem({ index, question, answer, open, onToggle }: FaqItemProps) {
   return (
-    <div className={`rounded-card p-8 ${open ? "bg-gradient-brand text-white" : "bg-surface-blue text-ink"}`}>
+    <div
+      className={`rounded-card p-6 sm:p-8 ${open ? "bg-gradient-brand text-white" : "bg-surface-blue text-ink"}`}
+    >
       <button
         type="button"
         onClick={onToggle}
@@ -25,7 +27,7 @@ export function FaqItem({ index, question, answer, open, onToggle }: FaqItemProp
           <span className={`block text-body-sm uppercase ${open ? "text-primary-100" : "text-primary"}`}>
             Question {String(index + 1).padStart(2, "0")}
           </span>
-          <span className="mt-2 block text-h5">{question}</span>
+          <span className="mt-2 block text-[1.25rem]">{question}</span>
         </span>
         <span className="relative flex h-8 w-8 shrink-0 items-center justify-center">
           <AnimatePresence initial={false} mode="wait">
@@ -58,7 +60,7 @@ export function FaqItem({ index, question, answer, open, onToggle }: FaqItemProp
             className="overflow-hidden"
           >
             <p className="mt-6 text-body-lg text-white">Answer:</p>
-            <p className="mt-2 max-w-2xl text-body text-white/90">{answer}</p>
+            <p className="mt-2 max-w-2xl text-body-lg text-white/90">{answer}</p>
           </motion.div>
         )}
       </AnimatePresence>

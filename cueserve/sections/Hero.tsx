@@ -28,7 +28,8 @@ export function Hero() {
         <motion.div
           variants={parentVariants}
           initial="hidden"
-          animate="show"
+          whileInView="show"
+          viewport={{ once: true, amount: 0.2 }}
           className="grid grid-cols-1 items-center gap-10 md:grid-cols-12"
         >
           <motion.div variants={itemVariants} className="md:col-span-5">
@@ -51,7 +52,7 @@ export function Hero() {
               variants={itemVariants}
               className="mt-6 flex flex-col items-start justify-between gap-6 sm:flex-row sm:items-center"
             >
-              <p className="max-w-sm text-body text-muted">
+              <p className="max-w-sm text-body-lg text-muted">
                 We blend creativity with strategy to build digital experiences that move brands
                 forward. From crafting standout websites.
               </p>
@@ -63,7 +64,13 @@ export function Hero() {
         </motion.div>
       </Container>
 
-      <motion.div variants={itemVariants} initial="hidden" animate="show" className="mt-16">
+      <motion.div
+        variants={itemVariants}
+        initial="hidden"
+        whileInView="show"
+        viewport={{ once: true, amount: 0.4 }}
+        className="mt-16"
+      >
         <Marquee>
           {SOFTWARE.map((name) => (
             <span key={name} className="px-8 text-h5 text-muted">

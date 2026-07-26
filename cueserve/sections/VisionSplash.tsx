@@ -24,7 +24,10 @@ const itemVariants: Variants = {
   show: { opacity: 1, y: 0, transition: { duration: 0.55, ease: [0.22, 1, 0.36, 1] } },
 };
 
-const LETTER_HEIGHT = "h-[20vw] max-h-[340px] min-h-[160px]";
+// clamp() (not raw vw) so the wordmark never overflows narrow viewports —
+// five letters + the wide O-placeholder would otherwise clip on mobile.
+const LETTER_SIZE = "text-[clamp(2.75rem,13vw,9rem)]";
+const LETTER_HEIGHT = "h-[clamp(2.75rem,13vw,9rem)]";
 
 // Above-the-fold VISION splash (Figma frame "Homepage", 16:18). Giant
 // wordmark with the "O" replaced by a masked photo, over a blue-to-white
@@ -46,7 +49,7 @@ export function VisionSplash() {
             variants={letterVariants}
             initial="hidden"
             animate="show"
-            className="font-display text-[20vw] leading-none text-primary md:text-[16vw]"
+            className={`font-display ${LETTER_SIZE} leading-none text-primary`}
             style={{ lineHeight: 1 }}
           >
             {letter}
@@ -66,7 +69,7 @@ export function VisionSplash() {
           variants={letterVariants}
           initial="hidden"
           animate="show"
-          className="font-display text-[20vw] leading-none text-primary md:text-[16vw]"
+          className={`font-display ${LETTER_SIZE} leading-none text-primary`}
           style={{ lineHeight: 1 }}
         >
           N

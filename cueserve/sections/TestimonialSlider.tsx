@@ -6,6 +6,7 @@ import { Container } from "@/components/layout/Container";
 import { Section } from "@/components/layout/Section";
 import { Heading } from "@/components/layout/Heading";
 import { StatOdometer } from "@/components/ui/StatOdometer";
+import { Reveal, RevealItem } from "@/components/motion/Reveal";
 
 const TESTIMONIALS = [
   {
@@ -80,7 +81,7 @@ export function TestimonialSlider() {
   return (
     <Section className="bg-white">
       <Container className="flex flex-col gap-12">
-        <div className="flex flex-wrap items-end justify-between gap-6">
+        <Reveal className="flex flex-wrap items-end justify-between gap-6">
           <Heading eyebrow="Our Testimonials" size="h2" className="max-w-xl">
             Our success is measured by the satisfaction of our clients. We take pride in building
             long partnerships.
@@ -89,27 +90,29 @@ export function TestimonialSlider() {
             <ArrowButton direction="prev" onClick={scrollPrev} />
             <ArrowButton direction="next" onClick={scrollNext} />
           </div>
-        </div>
+        </Reveal>
 
-        <div className="overflow-hidden" ref={emblaRef}>
-          <div className="flex">
-            {TESTIMONIALS.map((t, i) => (
-              <div key={t.name} className="min-w-0 flex-[0_0_100%] px-1" aria-hidden={selected !== i}>
-                <p className="max-w-3xl text-body-lg font-light text-ink">&ldquo;{t.quote}&rdquo;</p>
-                <p className="mt-4 font-display text-h5 italic text-primary">{t.name}</p>
-              </div>
-            ))}
-          </div>
-        </div>
-
-        <div className="flex flex-wrap gap-16 border-t border-line pt-10">
-          {STATS.map((stat) => (
-            <div key={stat.caption} className="flex flex-col gap-2">
-              <StatOdometer value={stat.value} suffix={stat.suffix} size="h2" />
-              <p className="text-body-sm font-light uppercase text-muted">{stat.caption}</p>
+        <Reveal>
+          <div ref={emblaRef} className="overflow-hidden">
+            <div className="flex">
+              {TESTIMONIALS.map((t, i) => (
+                <div key={t.name} className="min-w-0 flex-[0_0_100%] px-1" aria-hidden={selected !== i}>
+                  <p className="max-w-3xl text-[1.75rem] font-light text-ink">&ldquo;{t.quote}&rdquo;</p>
+                  <p className="mt-4 font-display text-[1.5rem] italic text-primary">{t.name}</p>
+                </div>
+              ))}
             </div>
+          </div>
+        </Reveal>
+
+        <Reveal stagger={0.15} className="flex flex-wrap gap-8 border-t border-line pt-10 sm:gap-16">
+          {STATS.map((stat) => (
+            <RevealItem key={stat.caption} className="flex flex-col gap-2">
+              <StatOdometer value={stat.value} suffix={stat.suffix} size="h2" />
+              <p className="text-body font-light uppercase text-muted">{stat.caption}</p>
+            </RevealItem>
           ))}
-        </div>
+        </Reveal>
       </Container>
     </Section>
   );

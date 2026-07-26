@@ -12,7 +12,7 @@ export function Header() {
   return (
     <header className="sticky top-4 z-50">
       <Container>
-        <div className="flex items-center justify-between rounded-pill bg-white py-2 pl-6 pr-2.5 shadow-card">
+        <div className="flex items-center justify-between rounded-pill bg-white py-2 pl-4 pr-2 sm:pl-6 sm:pr-2.5 shadow-card">
           <Link href="/" className="flex items-center gap-2 text-h6 font-display text-ink">
             Cueserve
           </Link>
@@ -31,7 +31,7 @@ export function Header() {
             ))}
           </nav>
 
-          <ButtonRoll href="#" variant="primary" className="w-[168px]">
+          <ButtonRoll href="#" variant="primary" className="w-auto md:w-[168px]">
             Contact Us
           </ButtonRoll>
         </div>

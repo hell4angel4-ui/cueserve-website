@@ -4,6 +4,7 @@
 
 import type { Metadata } from "next";
 import { Instrument_Sans, Poppins } from "next/font/google";
+import { MotionProvider } from "@/components/motion/MotionProvider";
 import "./globals.css";
 
 const instrumentSans = Instrument_Sans({
@@ -35,7 +36,9 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en" className={`${instrumentSans.variable} ${poppins.variable}`}>
-      <body>{children}</body>
+      <body>
+        <MotionProvider>{children}</MotionProvider>
+      </body>
     </html>
   );
 }

@@ -67,7 +67,7 @@ export function ButtonRoll({
   className = "",
   onClick,
 }: ButtonRollProps) {
-  const rowClasses = "flex h-14 items-center justify-center gap-2 text-body";
+  const rowClasses = "flex h-14 items-center justify-center gap-2 text-body-lg";
   const row = (
     <span className={rowClasses}>
       {children}

@@ -2,22 +2,23 @@
 
 import { useState } from "react";
 import { AnimatePresence, motion } from "framer-motion";
-import { Container } from "@/components/layout/Container";
 import { Section } from "@/components/layout/Section";
 import { Heading } from "@/components/layout/Heading";
 import { ButtonRoll } from "@/components/ui/ButtonRoll";
 import { PlaceholderImage } from "@/components/ui/PlaceholderImage";
+import { Reveal, RevealItem } from "@/components/motion/Reveal";
 
 const PROJECTS = ["Pixel Forge", "Studio Nova", "Brand Orbit", "Vision Core", "Design Flow"];
 
-// Our Projects (design.md §6.8, Figma node 87:525). Hovering a row reveals
-// the project image + arrow chip; image scales inside its rounded clip.
+// Our Projects (design.md §6.8, Figma node 87:525). Full-bleed: 1440px max
+// width with 147px inner padding (the `gutter` token), not the standard
+// 1146px Container. Hovering a row reveals the project image + arrow chip.
 export function OurProjects() {
   const [active, setActive] = useState<number | null>(null);
 
   return (
     <Section className="bg-surface-blue">
-      <Container className="flex flex-col gap-12">
+      <div className="mx-auto flex max-w-[1440px] flex-col gap-12 px-6 sm:px-10 lg:px-gutter">
         <div className="flex flex-wrap items-end justify-between gap-6">
           <Heading eyebrow="Our Projects" size="h2">
             Our Latest Projects.
@@ -27,22 +28,24 @@ export function OurProjects() {
           </ButtonRoll>
         </div>
 
-        <div className="flex flex-col divide-y divide-line border-b border-t border-line">
+        <Reveal stagger={0.1} className="flex flex-col divide-y divide-line border-b border-t border-line">
           {PROJECTS.map((name, i) => (
-            <div
+            <RevealItem
               key={name}
               onMouseEnter={() => setActive(i)}
               onMouseLeave={() => setActive(null)}
-              className="group relative flex items-center justify-between gap-6 py-8"
+              className="group relative flex flex-wrap items-center justify-between gap-4 py-8"
             >
-              <div className="flex items-center gap-6">
-                <span className="font-display text-h6 font-light italic text-primary">
+              <div className="flex flex-wrap items-center gap-3 sm:gap-6">
+                <span className="font-display text-[1.75rem] font-light italic text-primary">
                   {String(i + 1).padStart(2, "0")}
                 </span>
-                <span className="text-h3 text-ink transition-colors group-hover:text-primary">
+                <span className="text-[1.5rem] text-ink transition-colors group-hover:text-primary">
                   {name}
                 </span>
-                <span className="text-body-sm uppercase text-muted">UI/UX Design</span>
+                <span className="hidden text-body uppercase text-muted sm:inline-block">
+                  UI/UX Design
+                </span>
               </div>
 
               <AnimatePresence>
@@ -70,10 +73,10 @@ export function OurProjects() {
                   />
                 </svg>
               </span>
-            </div>
+            </RevealItem>
           ))}
-        </div>
-      </Container>
+        </Reveal>
+      </div>
     </Section>
   );
 }

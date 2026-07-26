@@ -17,10 +17,10 @@ export function ArticleCard({ category, date, title }: ArticleCardProps) {
       />
       <div className="flex items-center gap-2 text-body-sm text-primary">
         <span className="uppercase">{category}</span>
-        <span aria-hidden="true">●</span>
+        <span aria-hidden="true" className="text-xs">●</span>
         <span className="text-muted">{date}</span>
       </div>
-      <h3 className="text-h4 text-ink">{title}</h3>
+      <h3 className="text-[1.5rem] text-ink">{title}</h3>
       <a href="#" className="text-body text-primary transition-colors hover:text-primary-700">
         Read More
       </a>

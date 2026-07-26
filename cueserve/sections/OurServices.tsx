@@ -7,6 +7,7 @@ import { Section } from "@/components/layout/Section";
 import { Heading } from "@/components/layout/Heading";
 import { ButtonRoll } from "@/components/ui/ButtonRoll";
 import { PlaceholderImage } from "@/components/ui/PlaceholderImage";
+import { Reveal, RevealItem } from "@/components/motion/Reveal";
 
 const TAGS = ["Logo Design", "Guidelines", "Color Strategy", "Art Direction", "Brand Strategy"];
 
@@ -25,21 +26,23 @@ export function OurServices() {
   return (
     <Section className="bg-white">
       <Container className="flex flex-col gap-12">
-        <Heading eyebrow="Our Services" size="h2">
-          Creativity Meets Functionality.
-        </Heading>
+        <Reveal>
+          <Heading eyebrow="Our Services" size="h2">
+            Creativity Meets Functionality.
+          </Heading>
+        </Reveal>
 
-        <div className="flex flex-col divide-y divide-line border-b border-t border-line">
+        <Reveal stagger={0.1} className="flex flex-col divide-y divide-line border-b border-t border-line">
           {SERVICES.map((service, i) => (
-            <div
+            <RevealItem
               key={service.title}
               onMouseEnter={() => setActive(i)}
-              className="group grid grid-cols-1 items-center gap-6 py-8 md:grid-cols-[auto_1fr_auto_auto] md:gap-10"
+              className="group grid grid-cols-1 items-center gap-6 py-8 md:grid-cols-[auto_1fr_auto_auto] md:gap-6 lg:gap-10"
             >
-              <span className="font-display text-h6 font-light italic text-primary">
+              <span className="font-display text-[1.75rem] font-light italic text-primary">
                 {String(i + 1).padStart(2, "0")}
               </span>
-              <span className="text-h3 text-ink transition-colors group-hover:text-primary">
+              <span className="text-h2 text-ink transition-colors group-hover:text-primary">
                 {service.title}
               </span>
 
@@ -60,7 +63,7 @@ export function OurServices() {
               <div className="flex flex-wrap items-center gap-4">
                 <div className="hidden flex-wrap gap-3 lg:flex">
                   {service.tags.map((tag) => (
-                    <span key={tag} className="text-body-sm uppercase text-muted">
+                    <span key={tag} className="text-body uppercase text-muted">
                       {tag}
                     </span>
                   ))}
@@ -69,9 +72,9 @@ export function OurServices() {
                   View Details
                 </ButtonRoll>
               </div>
-            </div>
+            </RevealItem>
           ))}
-        </div>
+        </Reveal>
       </Container>
     </Section>
   );

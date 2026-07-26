@@ -3,6 +3,7 @@ import { Section } from "@/components/layout/Section";
 import { Heading } from "@/components/layout/Heading";
 import { ButtonRoll } from "@/components/ui/ButtonRoll";
 import { ArticleCard } from "@/components/ui/ArticleCard";
+import { Reveal, RevealItem } from "@/components/motion/Reveal";
 
 const ARTICLES = [
   { category: "Advice", date: "Nov 14, 2025", title: "Designing for Emotion: The Secret to Memorable Brands." },
@@ -16,20 +17,22 @@ export function NewsArticles() {
   return (
     <Section className="bg-surface-blue">
       <Container className="flex flex-col gap-12">
-        <div className="flex flex-wrap items-end justify-between gap-6">
+        <Reveal className="flex flex-wrap items-end justify-between gap-6">
           <Heading eyebrow="News & Articles" size="h2" className="max-w-xl">
             Fresh Perspectives On Strategy.
           </Heading>
           <ButtonRoll href="#" variant="outline">
             View All Articles
           </ButtonRoll>
-        </div>
+        </Reveal>
 
-        <div className="grid grid-cols-1 gap-10 md:grid-cols-3">
+        <Reveal stagger={0.12} className="grid grid-cols-1 gap-10 sm:grid-cols-2 md:grid-cols-3">
           {ARTICLES.map((article, i) => (
-            <ArticleCard key={i} {...article} />
+            <RevealItem key={i}>
+              <ArticleCard {...article} />
+            </RevealItem>
           ))}
-        </div>
+        </Reveal>
       </Container>
     </Section>
   );

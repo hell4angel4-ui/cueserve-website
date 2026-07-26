@@ -1,6 +1,7 @@
 import { Container } from "@/components/layout/Container";
 import { Section } from "@/components/layout/Section";
 import { StatOdometer } from "@/components/ui/StatOdometer";
+import { Reveal, RevealItem } from "@/components/motion/Reveal";
 
 const STATS = [
   { value: 96, suffix: "%", caption: "Positive Feedback From Clients" },
@@ -12,13 +13,15 @@ const STATS = [
 export function CounterBand() {
   return (
     <Section spacing="sm" className="bg-surface-blue">
-      <Container className="flex flex-wrap justify-center gap-16 text-center">
-        {STATS.map((stat) => (
-          <div key={stat.caption} className="flex flex-col items-center gap-2">
-            <StatOdometer value={stat.value} suffix={stat.suffix} size="h2" />
-            <p className="text-body-sm font-light uppercase text-ink">{stat.caption}</p>
-          </div>
-        ))}
+      <Container>
+        <Reveal stagger={0.15} className="flex flex-wrap justify-center gap-8 text-center sm:gap-16">
+          {STATS.map((stat) => (
+            <RevealItem key={stat.caption} className="flex flex-col items-center gap-2">
+              <StatOdometer value={stat.value} suffix={stat.suffix} size="h2" />
+              <p className="text-body font-light uppercase text-ink">{stat.caption}</p>
+            </RevealItem>
+          ))}
+        </Reveal>
       </Container>
     </Section>
   );

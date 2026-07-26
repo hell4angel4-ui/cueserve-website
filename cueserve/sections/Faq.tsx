@@ -6,6 +6,7 @@ import { Section } from "@/components/layout/Section";
 import { Heading } from "@/components/layout/Heading";
 import { ButtonRoll } from "@/components/ui/ButtonRoll";
 import { FaqItem } from "@/components/ui/FaqItem";
+import { Reveal, RevealItem } from "@/components/motion/Reveal";
 
 // design.md §10: FAQ questions 01-04 repeat the same question/answer in the
 // Figma file — kept as-is per "keep placeholders" instruction.
@@ -22,22 +23,25 @@ export function Faq() {
   return (
     <Section className="bg-white">
       <Container className="flex flex-col gap-12">
-        <Heading eyebrow="FAQ" size="h2">
-          Frequently Asked Questions.
-        </Heading>
+        <Reveal>
+          <Heading eyebrow="FAQ" size="h2">
+            Frequently Asked Questions.
+          </Heading>
+        </Reveal>
 
-        <div className="flex flex-col gap-4">
+        <Reveal stagger={0.1} className="flex flex-col gap-4">
           {FAQS.map((faq, i) => (
-            <FaqItem
-              key={i}
-              index={i}
-              question={faq.question}
-              answer={faq.answer}
-              open={open === i}
-              onToggle={() => setOpen(open === i ? -1 : i)}
-            />
+            <RevealItem key={i}>
+              <FaqItem
+                index={i}
+                question={faq.question}
+                answer={faq.answer}
+                open={open === i}
+                onToggle={() => setOpen(open === i ? -1 : i)}
+              />
+            </RevealItem>
           ))}
-        </div>
+        </Reveal>
 
         <ButtonRoll href="#" variant="text" className="self-center">
           More About Us

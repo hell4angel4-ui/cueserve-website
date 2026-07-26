@@ -59,7 +59,7 @@ const config: Config = {
       fontSize: {
         // Heading ramp (Arooth): H1 64 → H6 22. Fluid via clamp for large sizes.
         h1: ["clamp(2.5rem, 5vw, 4rem)", { lineHeight: "1.05", fontWeight: "400" }],
-        h2: ["clamp(2rem, 4vw, 3.25rem)", { lineHeight: "1.1", fontWeight: "400" }],
+        h2: ["clamp(2rem, 4vw, 3rem)", { lineHeight: "1.1", fontWeight: "400" }],
         h3: ["clamp(1.75rem, 3vw, 2.5rem)", { lineHeight: "1.15", fontWeight: "400" }],
         h4: ["2rem", { lineHeight: "1.2", fontWeight: "400" }],
         h5: ["1.75rem", { lineHeight: "1.25", fontWeight: "400" }],
