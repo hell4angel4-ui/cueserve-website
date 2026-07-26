@@ -5,24 +5,34 @@ import { Container } from "@/components/layout/Container";
 import { ButtonRoll } from "@/components/ui/ButtonRoll";
 import { Marquee } from "@/components/ui/Marquee";
 
-// Backdrop word — placeholder for the exported "V-I-S-I-O-N" SVG letter set
-// (design.md §8, §9). Rendered as styled text until those assets exist.
-const VISION = ["V", "I", "S", "I", "O", "N"];
+// Headline units for the stagger reveal. Verified against arooth.webflow.io:
+// the real hero animates its actual headline text letter/word-by-word (GSAP
+// SplitText) — there's no separate giant backdrop word. "Vision For the" is
+// the blue-accented phrase; the small bar mirrors the site's decorative
+// accent-line span between "Crafting Modern" and "Vision For the".
+const HEADLINE: { text: string; accent?: boolean }[] = [
+  { text: "Crafting" },
+  { text: "Modern" },
+  { text: "Vision", accent: true },
+  { text: "For", accent: true },
+  { text: "the", accent: true },
+  { text: "Ambitious" },
+  { text: "Brands" },
+];
 
-const letterVariants: Variants = {
-  hidden: { y: -80, opacity: 0 },
-  show: (i: number) => ({
-    y: 0,
-    opacity: 1,
-    transition: { delay: i * 0.08, duration: 0.6, ease: [0.22, 1, 0.36, 1] },
-  }),
+const parentVariants: Variants = {
+  hidden: {},
+  show: { transition: { staggerChildren: 0.15, delayChildren: 0.1 } },
 };
 
-const contentVariants: Variants = {
+const headlineVariants: Variants = {
   hidden: {},
-  show: {
-    transition: { staggerChildren: 0.12, delayChildren: VISION.length * 0.08 + 0.2 },
-  },
+  show: { transition: { staggerChildren: 0.08 } },
+};
+
+const wordVariants: Variants = {
+  hidden: { y: -40, opacity: 0 },
+  show: { y: 0, opacity: 1, transition: { duration: 0.6, ease: [0.22, 1, 0.36, 1] } },
 };
 
 const itemVariants: Variants = {
@@ -30,44 +40,43 @@ const itemVariants: Variants = {
   show: { opacity: 1, y: 0, transition: { duration: 0.55, ease: [0.22, 1, 0.36, 1] } },
 };
 
-// Hero (design.md §6, Figma node 48:11): vertical stack, 200px top padding to
-// clear the fixed header, 20px gap. Letters drop in first, then headline +
-// paragraph + CTA stagger in, then the results ticker plays underneath.
+// Hero (design.md §6, Figma node 48:11 — structure/motion cross-checked
+// against arooth.webflow.io). 200px top padding clears the sticky header.
 export function Hero() {
   return (
     <section className="relative overflow-hidden bg-surface-blue pt-[200px]">
-      <div
-        aria-hidden="true"
-        className="pointer-events-none absolute inset-x-0 top-0 flex w-full justify-between px-6 text-[12vw] font-display leading-none text-primary-100 select-none md:px-16"
-      >
-        {VISION.map((letter, i) => (
-          <motion.span
-            key={`${letter}-${i}`}
-            custom={i}
-            variants={letterVariants}
-            initial="hidden"
-            animate="show"
-          >
-            {letter}
-          </motion.span>
-        ))}
-      </div>
-
       <Container className="relative flex flex-col items-center gap-5 pb-16 text-center">
         <motion.div
           className="flex flex-col items-center gap-5"
-          variants={contentVariants}
+          variants={parentVariants}
           initial="hidden"
           animate="show"
         >
-          <motion.h1 variants={itemVariants} className="max-w-3xl text-hero">
-            Crafting Modern — <span className="text-primary">Vision</span> For the Ambitious
-            Brands
+          <motion.h1
+            variants={headlineVariants}
+            className="flex max-w-3xl flex-wrap items-center justify-center gap-x-3 gap-y-1 text-hero"
+          >
+            {HEADLINE.map(({ text, accent }, i) => (
+              <span key={i} className="inline-flex items-center gap-3">
+                {i === 2 && (
+                  <motion.span
+                    aria-hidden="true"
+                    variants={wordVariants}
+                    className="inline-block h-[0.6em] w-3 rounded-pill bg-primary align-middle"
+                  />
+                )}
+                <motion.span variants={wordVariants} className={accent ? "text-primary" : undefined}>
+                  {text}
+                </motion.span>
+              </span>
+            ))}
           </motion.h1>
+
           <motion.p variants={itemVariants} className="max-w-xl text-body-lg text-muted">
             We blend creativity with strategy to build digital experiences that move brands
             forward.
           </motion.p>
+
           <motion.div variants={itemVariants}>
             <ButtonRoll href="#" variant="text">
               Get Started Now
