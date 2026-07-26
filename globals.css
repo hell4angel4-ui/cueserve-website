@@ -1,0 +1,8 @@
+/* app/globals.css — single stylesheet entry.
+   Order matters: Tailwind base first, then tokens (which use @layer base/components),
+   then components + utilities. */
+
+@import "tailwindcss/base";
+@import "./tokens.css";
+@import "tailwindcss/components";
+@import "tailwindcss/utilities";

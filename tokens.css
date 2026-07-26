@@ -1,0 +1,145 @@
+/* =========================================================================
+   Cueserve — Design Tokens
+   CSS custom properties mirroring tailwind.config.ts. Import once (globals.css).
+   Use Tailwind classes in components; these vars are for raw CSS, gradients,
+   and any place a token is easier as a variable (e.g. digit-odometer heights).
+   ========================================================================= */
+
+@layer base {
+  :root {
+    /* --- Brand blue ramp --- */
+    --primary: #0040c1;
+    --primary-50: #eff4ff;
+    --primary-100: #d1e0ff;
+    --primary-400: #6199ff;
+    --primary-500: #2970ff;
+    --primary-600: #0042c5;
+    --primary-700: #00359e;
+
+    /* --- Ink + grays --- */
+    --ink: #111827;
+    --muted: #4b5563;
+    --subtle: #6b7280;
+    --white: #ffffff;
+
+    /* --- Surfaces --- */
+    --surface-blue: #f5faff;
+    --surface-blue-2: #eff4ff;
+
+    /* --- Accents --- */
+    --sky: #2384c6;
+    --navy: #0c385a;
+    --cream: #fff3d1;
+    --line: #ebebeb;
+
+    /* --- Gradients --- */
+    --gradient-brand: linear-gradient(135deg, #0136a2 0%, #266dfb 100%);
+    --gradient-sky: linear-gradient(135deg, #2384c6 0%, #0040c1 100%);
+
+    /* --- Radii --- */
+    --radius-pill: 99px;
+    --radius-card: 40px;
+    --radius-media: 20px;
+    --radius-mid: 30px;
+
+    /* --- Elevation --- */
+    --shadow-card: 0 4px 4px rgba(12, 12, 13, 0.05),
+      0 16px 32px rgba(12, 12, 13, 0.1);
+
+    /* --- Layout --- */
+    --container: 1146px;
+    --section-y: 6.25rem; /* 100px */
+    --gutter: 9.1875rem; /* 147px */
+
+    /* --- Motion --- */
+    --ease-entrance: cubic-bezier(0.22, 1, 0.36, 1);
+    --ease-accordion: cubic-bezier(0.4, 0, 0.2, 1);
+    --dur-micro: 250ms;
+    --dur-reveal: 550ms;
+
+    /* --- Fonts (set by next/font, listed here for reference) --- */
+    /* --font-display: Instrument Sans */
+    /* --font-body: Poppins            */
+  }
+
+  /* Base document */
+  html {
+    -webkit-font-smoothing: antialiased;
+    text-rendering: optimizeLegibility;
+  }
+
+  body {
+    background: var(--white);
+    color: var(--ink);
+    font-family: var(--font-body), system-ui, sans-serif;
+    font-size: 1rem;
+    line-height: 1.6;
+  }
+
+  h1, h2, h3, h4, h5, h6 {
+    font-family: var(--font-display), system-ui, sans-serif;
+    font-weight: 400;
+    color: var(--ink);
+  }
+
+  /* Respect reduced motion everywhere */
+  @media (prefers-reduced-motion: reduce) {
+    *,
+    *::before,
+    *::after {
+      animation-duration: 0.01ms !important;
+      animation-iteration-count: 1 !important;
+      transition-duration: 0.01ms !important;
+      scroll-behavior: auto !important;
+    }
+  }
+}
+
+@layer components {
+  /* Eyebrow: small blue label above section headings (used on every section) */
+  .eyebrow {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    color: var(--primary);
+    font-size: 1rem;
+    line-height: 1.2;
+  }
+
+  /* Seamless marquee: wrap two identical tracks; animate the row -50%. */
+  .marquee {
+    display: flex;
+    width: max-content;
+    animation: marquee 30s linear infinite;
+  }
+  .marquee:hover {
+    animation-play-state: paused;
+  }
+
+  /* Text-roll button: two stacked label layers, second slides up on hover.
+     Markup:
+     <a class="btn-roll"><span class="btn-roll__inner">
+       <span>Get Started Now</span><span>Get Started Now</span>
+     </span></a> */
+  .btn-roll {
+    position: relative;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    overflow: hidden;
+    border-radius: var(--radius-pill);
+  }
+  .btn-roll__inner {
+    display: inline-grid;
+    grid-auto-flow: row;
+    transition: transform var(--dur-micro) var(--ease-entrance);
+  }
+  .btn-roll:hover .btn-roll__inner {
+    transform: translateY(-50%);
+  }
+}
+
+@keyframes marquee {
+  from { transform: translateX(0); }
+  to { transform: translateX(-50%); }
+}
