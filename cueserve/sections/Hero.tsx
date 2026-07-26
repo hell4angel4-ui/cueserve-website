@@ -4,35 +4,13 @@ import { motion, type Variants } from "framer-motion";
 import { Container } from "@/components/layout/Container";
 import { ButtonRoll } from "@/components/ui/ButtonRoll";
 import { Marquee } from "@/components/ui/Marquee";
+import { PlaceholderImage } from "@/components/ui/PlaceholderImage";
 
-// Headline units for the stagger reveal. Verified against arooth.webflow.io:
-// the real hero animates its actual headline text letter/word-by-word (GSAP
-// SplitText) — there's no separate giant backdrop word. "Vision For the" is
-// the blue-accented phrase; the small bar mirrors the site's decorative
-// accent-line span between "Crafting Modern" and "Vision For the".
-const HEADLINE: { text: string; accent?: boolean }[] = [
-  { text: "Crafting" },
-  { text: "Modern" },
-  { text: "Vision", accent: true },
-  { text: "For", accent: true },
-  { text: "the", accent: true },
-  { text: "Ambitious" },
-  { text: "Brands" },
-];
+const SOFTWARE = ["Microsoft .NET", "Angular", "React", "Next.js", "HTML5", "CSS3", "JavaScript"];
 
 const parentVariants: Variants = {
   hidden: {},
   show: { transition: { staggerChildren: 0.15, delayChildren: 0.1 } },
-};
-
-const headlineVariants: Variants = {
-  hidden: {},
-  show: { transition: { staggerChildren: 0.08 } },
-};
-
-const wordVariants: Variants = {
-  hidden: { y: -40, opacity: 0 },
-  show: { y: 0, opacity: 1, transition: { duration: 0.6, ease: [0.22, 1, 0.36, 1] } },
 };
 
 const itemVariants: Variants = {
@@ -40,58 +18,60 @@ const itemVariants: Variants = {
   show: { opacity: 1, y: 0, transition: { duration: 0.55, ease: [0.22, 1, 0.36, 1] } },
 };
 
-// Hero (design.md §6, Figma node 48:11 — structure/motion cross-checked
-// against arooth.webflow.io). 200px top padding clears the sticky header.
+// Hero (design.md §6, Figma "Homepage scrolled view" 48:2). Left-aligned,
+// 3-line headline with a literal em dash before the accent phrase, portrait
+// placeholder alongside, and a software-logo marquee under the CTA row.
 export function Hero() {
   return (
-    <section className="relative overflow-hidden bg-surface-blue pt-[200px]">
-      <Container className="relative flex flex-col items-center gap-5 pb-16 text-center">
+    <section className="bg-white pb-16 pt-24">
+      <Container>
         <motion.div
-          className="flex flex-col items-center gap-5"
           variants={parentVariants}
           initial="hidden"
           animate="show"
+          className="grid grid-cols-1 items-center gap-10 md:grid-cols-12"
         >
-          <motion.h1
-            variants={headlineVariants}
-            className="flex max-w-3xl flex-wrap items-center justify-center gap-x-3 gap-y-1 text-hero"
-          >
-            {HEADLINE.map(({ text, accent }, i) => (
-              <span key={i} className="inline-flex items-center gap-3">
-                {i === 2 && (
-                  <motion.span
-                    aria-hidden="true"
-                    variants={wordVariants}
-                    className="inline-block h-[0.6em] w-3 rounded-pill bg-primary align-middle"
-                  />
-                )}
-                <motion.span variants={wordVariants} className={accent ? "text-primary" : undefined}>
-                  {text}
-                </motion.span>
-              </span>
-            ))}
-          </motion.h1>
-
-          <motion.p variants={itemVariants} className="max-w-xl text-body-lg text-muted">
-            We blend creativity with strategy to build digital experiences that move brands
-            forward.
-          </motion.p>
-
-          <motion.div variants={itemVariants}>
-            <ButtonRoll href="#" variant="text">
-              Get Started Now
-            </ButtonRoll>
+          <motion.div variants={itemVariants} className="md:col-span-5">
+            <PlaceholderImage
+              label="Hero background portrait — placeholder for Figma export"
+              className="aspect-[4/5] w-full rounded-card"
+            />
           </motion.div>
+
+          <div className="md:col-span-7">
+            <motion.h1 variants={itemVariants} className="text-hero">
+              Crafting Modern
+              <br />
+              <span className="text-primary">— Vision For the</span>
+              <br />
+              Ambitious Brands
+            </motion.h1>
+
+            <motion.div
+              variants={itemVariants}
+              className="mt-6 flex flex-col items-start justify-between gap-6 sm:flex-row sm:items-center"
+            >
+              <p className="max-w-sm text-body text-muted">
+                We blend creativity with strategy to build digital experiences that move brands
+                forward. From crafting standout websites.
+              </p>
+              <ButtonRoll href="#" variant="text">
+                Get Started Now
+              </ButtonRoll>
+            </motion.div>
+          </div>
         </motion.div>
       </Container>
 
-      <div className="relative border-t border-line bg-white/60 py-6">
+      <motion.div variants={itemVariants} initial="hidden" animate="show" className="mt-16">
         <Marquee>
-          <span className="px-8 text-h5">Real Results ✳</span>
-          <span className="px-8 text-h5">Modern Design ✳</span>
-          <span className="px-8 text-h5">Ambitious Brands ✳</span>
+          {SOFTWARE.map((name) => (
+            <span key={name} className="px-8 text-h5 text-muted">
+              {name}
+            </span>
+          ))}
         </Marquee>
-      </div>
+      </motion.div>
     </section>
   );
 }
