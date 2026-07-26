@@ -10,7 +10,8 @@
       "PowerShell(npm -v)",
       "PowerShell(Test-Path \"C:\\\\Program Files\\\\nodejs\\\\node.exe\"; Test-Path \"$env:APPDATA\\\\npm\"; $env:Path -split ';' | Select-String -Pattern 'node')",
       "PowerShell(& \"C:\\\\Program Files\\\\nodejs\\\\node.exe\" -v)",
-      "PowerShell(& \"C:\\\\Program Files\\\\nodejs\\\\npm.cmd\" -v)"
+      "PowerShell(& \"C:\\\\Program Files\\\\nodejs\\\\npm.cmd\" -v)",
+      "Bash(git commit *)"
     ]
   }
 }
