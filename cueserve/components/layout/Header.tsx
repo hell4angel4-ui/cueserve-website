@@ -7,13 +7,15 @@ const NAV_LINKS = ["Home", "About Us", "Services", "Solutions", "Our Work", "Blo
 
 // Floating rounded nav pill, inset from the viewport edges with a shadow —
 // per the Figma header (matches the "Home" active pill state and the
-// Contact Us CTA). Sticky so it stays visible over both the VISION splash
-// and the hero photo behind it.
+// Contact Us CTA). Fixed (not sticky) so it stays visible over both the
+// VISION splash and the hero photo regardless of scroll position; the
+// translucent blur + primary-100 border were cross-checked against the
+// colleague's deployed build.
 export function Header() {
   return (
-    <header className="sticky top-4 z-50">
+    <header className="fixed left-0 right-0 top-4 z-50">
       <Container>
-        <div className="flex items-center justify-between rounded-pill bg-white py-2 pl-4 pr-2 sm:pl-6 sm:pr-2.5 shadow-card">
+        <div className="flex items-center justify-between rounded-pill border border-primary-100 bg-white/90 py-2 pl-4 pr-2 shadow-card backdrop-blur-md sm:pl-6 sm:pr-2.5">
           <Link href="/" className="flex shrink-0 items-center">
             <Image src="/logo-full.svg" alt="Cueserve" width={140} height={32} priority />
           </Link>

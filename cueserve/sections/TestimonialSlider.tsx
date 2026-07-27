@@ -26,9 +26,12 @@ const TESTIMONIALS = [
   },
 ];
 
+// Missed the third stat entirely on the first pass — the section should
+// show 3 chips, not 2.
 const STATS = [
   { value: 95, suffix: "%", caption: "Client Satisfaction Rate" },
-  { value: 40, suffix: "+", caption: "Global Brands Served Worldwide" },
+  { value: 120, suffix: "+", caption: "Global Brands Served Worldwide" },
+  { value: 5, suffix: "X", caption: "Average Growth Achieved" },
 ];
 
 function ArrowButton({ direction, onClick }: { direction: "prev" | "next"; onClick: () => void }) {

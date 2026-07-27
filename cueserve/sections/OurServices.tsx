@@ -9,13 +9,13 @@ import { ButtonRoll } from "@/components/ui/ButtonRoll";
 import { PlaceholderImage } from "@/components/ui/PlaceholderImage";
 import { Reveal, RevealItem } from "@/components/motion/Reveal";
 
-const TAGS = ["Logo Design", "Guidelines", "Color Strategy", "Art Direction", "Brand Strategy"];
-
+// Each service gets its own capability tags — a shared array here was a
+// real mistake (identical tags on every row regardless of service).
 const SERVICES = [
-  { title: "Brand Identity", tags: TAGS },
-  { title: "UI/UX Strategy", tags: TAGS },
-  { title: "Digital Marketing", tags: TAGS },
-  { title: "Product Design", tags: TAGS },
+  { title: "Brand Identity", tags: ["Logo Design", "Guidelines", "Color Strategy", "Art Direction", "Packaging"] },
+  { title: "UI/UX Strategy", tags: ["User Research", "Wireframing", "Prototyping", "Usability Testing"] },
+  { title: "Digital Marketing", tags: ["SEO", "Content Strategy", "Social Media", "PPC Campaigns"] },
+  { title: "Product Design", tags: ["3D Modeling", "Industrial Design", "Concepting"] },
 ];
 
 // Our Services (design.md §6.7, Figma node 79:230). Hovering a row reveals

@@ -43,7 +43,7 @@ const LETTER_HEIGHT = "h-[clamp(2.75rem,13vw,9rem)]";
 // exported banner background.
 export function VisionSplash() {
   return (
-    <section className="relative overflow-hidden pb-24 pt-8">
+    <section className="relative overflow-hidden pb-24 pt-32">
       <Image
         src="/banner-bg.jpg"
         alt=""

@@ -5,14 +5,15 @@ import { ButtonRoll } from "@/components/ui/ButtonRoll";
 import { ArticleCard } from "@/components/ui/ArticleCard";
 import { Reveal, RevealItem } from "@/components/motion/Reveal";
 
+// design.md §10 flags the Figma file's article cards as sharing one
+// title/date — a known issue it says to fix in the build. Differentiated here.
 const ARTICLES = [
   { category: "Advice", date: "Nov 14, 2025", title: "Designing for Emotion: The Secret to Memorable Brands." },
-  { category: "Advice", date: "Nov 14, 2025", title: "The Power of Minimalism in Modern Web Design." },
-  { category: "Advice", date: "Nov 14, 2025", title: "Building Digital Trust Through Strong Brand Identity." },
+  { category: "Strategy", date: "Dec 02, 2025", title: "How to Build a Design System that Scales." },
+  { category: "Design", date: "Jan 18, 2026", title: "The Evolution of Digital Interfaces." },
 ];
 
-// News & Articles (design.md §6.10, Figma node 140:26). Shared placeholder
-// title/date across cards per design.md §10 (known copy issue).
+// News & Articles (design.md §6.10, Figma node 140:26).
 export function NewsArticles() {
   return (
     <Section className="bg-surface-blue">
