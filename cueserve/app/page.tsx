@@ -1,8 +1,8 @@
 // app/page.tsx — homepage. Sections composed in Figma/design.md order.
 
 import { Header } from "@/components/layout/Header";
-import { VisionSplash } from "@/sections/VisionSplash";
-import { Hero } from "@/sections/Hero";
+import { IntroPin } from "@/sections/IntroPin";
+import { TechMarquee } from "@/sections/TechMarquee";
 import { About } from "@/sections/About";
 import { CounterBand } from "@/sections/CounterBand";
 import { ServicesMarquee } from "@/sections/ServicesMarquee";
@@ -18,8 +18,8 @@ export default function Home() {
   return (
     <>
       <Header />
-      <VisionSplash />
-      <Hero />
+      <IntroPin />
+      <TechMarquee />
       <About />
       <CounterBand />
       <ServicesMarquee />
