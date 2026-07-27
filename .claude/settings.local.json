@@ -16,7 +16,8 @@
       "PowerShell(Copy-Item \"tokens.css\" \"cueserve\\\\app\\\\tokens.css\")",
       "PowerShell(Copy-Item \"layout.tsx\" \"cueserve\\\\app\\\\layout.tsx\")",
       "Bash(node -e \"console.log\\('bash grep unavailable'\\)\")",
-      "Bash(ls \"/c/Users/acer/Downloads/Sources/Sources/Cueserve Branding Logo\" 2>&1)"
+      "Bash(ls \"/c/Users/acer/Downloads/Sources/Sources/Cueserve Branding Logo\" 2>&1)",
+      "Bash(git commit -m 'Fix broken button roll effect and header CTA; wire in real brand assets' -m 'Fixed a real rendering bug: .btn-roll used two absolutely-positioned label rows, which removed both from normal flow and collapsed the button'\\\\''s intrinsic width to just its padding \\(causing the overlapping/broken text seen in the screenshot\\). Now the first row stays in flow to size the button; only the duplicate is absolutely overlaid. Also fixed the header CTA separately shrinking to 0 width in its flex row \\(needed shrink-0\\). *)"
     ]
   }
 }
