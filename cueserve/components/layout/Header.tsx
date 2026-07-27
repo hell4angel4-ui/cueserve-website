@@ -17,7 +17,7 @@ export function Header() {
       <Container>
         <div className="flex items-center justify-between rounded-pill border border-primary-100 bg-white/90 py-2 pl-4 pr-2 shadow-card backdrop-blur-md sm:pl-6 sm:pr-2.5">
           <Link href="/" className="flex shrink-0 items-center">
-            <Image src="/logo-full.svg" alt="Cueserve" width={140} height={32} priority />
+            <Image src="/logo-full.svg" alt="Cueserve" width={140} height={22} priority />
           </Link>
 
           <nav className="hidden items-center gap-1 md:flex">

@@ -49,13 +49,21 @@ export function VisionSplash() {
         alt=""
         fill
         priority
+        sizes="100vw"
         className="pointer-events-none absolute inset-0 -z-10 object-cover"
       />
 
       <Container className={`relative mt-16 flex w-full items-stretch justify-between ${LETTER_HEIGHT}`}>
         {LETTERS.map((letter, i) => (
           <motion.span key={i} custom={i} variants={letterVariants} initial="hidden" animate="show">
-            <Image src={letter.src} alt={letter.alt} width={letter.width} height={letter.height} className="h-full w-auto" />
+            <Image
+              src={letter.src}
+              alt={letter.alt}
+              width={letter.width}
+              height={letter.height}
+              priority={i === 0}
+              className="h-full w-auto"
+            />
           </motion.span>
         ))}
         <motion.div
@@ -65,7 +73,7 @@ export function VisionSplash() {
           animate="show"
           className="relative mx-[1vw] flex-[1.7] overflow-hidden rounded-pill"
         >
-          <Image src="/vision-portrait.jpg" alt="Cueserve" fill className="object-cover" />
+          <Image src="/vision-portrait.jpg" alt="Cueserve" fill sizes="(max-width: 768px) 60vw, 30vw" className="object-cover" />
         </motion.div>
         <motion.span custom={5} variants={letterVariants} initial="hidden" animate="show">
           <Image

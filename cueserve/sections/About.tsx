@@ -31,8 +31,9 @@ export function About() {
 
         <Reveal className="flex flex-col items-start gap-4">
           <Eyebrow>About Us</Eyebrow>
+          <p className="text-body font-light uppercase text-muted">Projects</p>
           <StatOdometer value={250} suffix="+" />
-          <p className="-mt-2 text-body font-light uppercase text-muted">Projects Completed</p>
+          <p className="-mt-2 text-body font-light uppercase text-muted">Completed</p>
 
           <p className="mt-4 text-body-lg text-ink">
             Our team of designers, developers, and thinkers driven by one purpose — to craft

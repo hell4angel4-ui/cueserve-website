@@ -17,8 +17,8 @@ export function OurProjects() {
   const [active, setActive] = useState<number | null>(null);
 
   return (
-    <Section className="bg-surface-blue">
-      <div className="mx-auto flex max-w-[1440px] flex-col gap-12 px-6 sm:px-10 lg:px-gutter">
+    <Section className="flex min-h-screen flex-col bg-surface-blue">
+      <div className="mx-auto flex w-full max-w-[1440px] flex-1 flex-col justify-between gap-12 px-6 sm:px-10 lg:px-gutter">
         <div className="flex flex-wrap items-end justify-between gap-6">
           <Heading eyebrow="Our Projects" size="h2">
             Our Latest Projects.
