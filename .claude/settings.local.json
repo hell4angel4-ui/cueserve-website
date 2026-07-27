@@ -15,7 +15,8 @@
       "PowerShell(Copy-Item \"tailwind.config.ts\" \"cueserve\\\\tailwind.config.ts\")",
       "PowerShell(Copy-Item \"tokens.css\" \"cueserve\\\\app\\\\tokens.css\")",
       "PowerShell(Copy-Item \"layout.tsx\" \"cueserve\\\\app\\\\layout.tsx\")",
-      "Bash(node -e \"console.log\\('bash grep unavailable'\\)\")"
+      "Bash(node -e \"console.log\\('bash grep unavailable'\\)\")",
+      "Bash(ls \"/c/Users/acer/Downloads/Sources/Sources/Cueserve Branding Logo\" 2>&1)"
     ]
   }
 }

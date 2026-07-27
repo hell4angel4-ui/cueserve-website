@@ -1,9 +1,19 @@
 "use client";
 
+import Image from "next/image";
 import { motion, type Variants } from "framer-motion";
 import { Container } from "@/components/layout/Container";
 import { ButtonRoll } from "@/components/ui/ButtonRoll";
-import { PlaceholderImage } from "@/components/ui/PlaceholderImage";
+
+// Real exported letterforms (Cueserve brand assets) — each keeps its native
+// aspect ratio via width/height, scaled to a shared height in the row below.
+const LETTERS = [
+  { src: "/letter-v.svg", width: 187, height: 224, alt: "V" },
+  { src: "/letter-i.svg", width: 43, height: 224, alt: "I" },
+  { src: "/letter-s.svg", width: 173, height: 232, alt: "S" },
+  { src: "/letter-i.svg", width: 43, height: 224, alt: "I" },
+];
+const LETTER_N = { src: "/letter-n.svg", width: 173, height: 224, alt: "N" };
 
 const letterVariants: Variants = {
   hidden: { y: -60, opacity: 0 },
@@ -25,34 +35,27 @@ const itemVariants: Variants = {
 };
 
 // clamp() (not raw vw) so the wordmark never overflows narrow viewports —
-// five letters + the wide O-placeholder would otherwise clip on mobile.
-const LETTER_SIZE = "text-[clamp(2.75rem,13vw,9rem)]";
+// five letters + the wide O-photo would otherwise clip on mobile.
 const LETTER_HEIGHT = "h-[clamp(2.75rem,13vw,9rem)]";
 
 // Above-the-fold VISION splash (Figma frame "Homepage", 16:18). Giant
-// wordmark with the "O" replaced by a masked photo, over a blue-to-white
-// gradient with a decorative grid overlay. No real photography exists yet
-// (design.md §9), so the "O" uses a placeholder graphic.
+// wordmark with the "O" replaced by the real masked photo, over the actual
+// exported banner background.
 export function VisionSplash() {
   return (
-    <section className="relative overflow-hidden bg-gradient-to-b from-primary-500 via-primary-100 to-white pb-24 pt-8">
-      <div
-        aria-hidden="true"
-        className="pointer-events-none absolute inset-0 bg-[linear-gradient(to_right,rgba(255,255,255,0.35)_1px,transparent_1px),linear-gradient(to_bottom,rgba(255,255,255,0.35)_1px,transparent_1px)] bg-[size:8.33%_25%]"
+    <section className="relative overflow-hidden pb-24 pt-8">
+      <Image
+        src="/banner-bg.jpg"
+        alt=""
+        fill
+        priority
+        className="pointer-events-none absolute inset-0 -z-10 object-cover"
       />
 
       <Container className={`relative mt-16 flex w-full items-stretch justify-between ${LETTER_HEIGHT}`}>
-        {["V", "I", "S", "I"].map((letter, i) => (
-          <motion.span
-            key={letter + i}
-            custom={i}
-            variants={letterVariants}
-            initial="hidden"
-            animate="show"
-            className={`font-display ${LETTER_SIZE} leading-none text-primary`}
-            style={{ lineHeight: 1 }}
-          >
-            {letter}
+        {LETTERS.map((letter, i) => (
+          <motion.span key={i} custom={i} variants={letterVariants} initial="hidden" animate="show">
+            <Image src={letter.src} alt={letter.alt} width={letter.width} height={letter.height} className="h-full w-auto" />
           </motion.span>
         ))}
         <motion.div
@@ -60,19 +63,18 @@ export function VisionSplash() {
           variants={letterVariants}
           initial="hidden"
           animate="show"
-          className="mx-[1vw] flex-[1.7] overflow-hidden rounded-pill"
+          className="relative mx-[1vw] flex-[1.7] overflow-hidden rounded-pill"
         >
-          <PlaceholderImage label="Hero portrait — placeholder for Figma export" className="h-full w-full" />
+          <Image src="/vision-portrait.jpg" alt="Cueserve" fill className="object-cover" />
         </motion.div>
-        <motion.span
-          custom={5}
-          variants={letterVariants}
-          initial="hidden"
-          animate="show"
-          className={`font-display ${LETTER_SIZE} leading-none text-primary`}
-          style={{ lineHeight: 1 }}
-        >
-          N
+        <motion.span custom={5} variants={letterVariants} initial="hidden" animate="show">
+          <Image
+            src={LETTER_N.src}
+            alt={LETTER_N.alt}
+            width={LETTER_N.width}
+            height={LETTER_N.height}
+            className="h-full w-auto"
+          />
         </motion.span>
       </Container>
 

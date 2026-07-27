@@ -116,26 +116,48 @@
     animation-play-state: paused;
   }
 
-  /* Text-roll button: two stacked label layers, second slides up on hover.
+  /* Text-roll button: the first row stays in normal flow (so it sets the
+     button's actual size from its content); the second row is an absolute
+     overlay sitting one row-height below, clipped out by .btn-roll's
+     overflow. Hover slides both up, swapping which is visible.
      Markup:
      <a class="btn-roll"><span class="btn-roll__inner">
-       <span>Get Started Now</span><span>Get Started Now</span>
+       <span class="btn-roll__row btn-roll__row--first">...</span>
+       <span class="btn-roll__row btn-roll__row--second">...</span>
      </span></a> */
   .btn-roll {
     position: relative;
     display: inline-flex;
     align-items: center;
-    gap: 0.5rem;
+    justify-content: center;
     overflow: hidden;
     border-radius: var(--radius-pill);
   }
   .btn-roll__inner {
-    display: inline-grid;
-    grid-auto-flow: row;
+    position: relative;
+    display: block;
+  }
+  .btn-roll__row {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
     transition: transform var(--dur-micro) var(--ease-entrance);
   }
-  .btn-roll:hover .btn-roll__inner {
-    transform: translateY(-50%);
+  .btn-roll__row--first {
+    position: relative;
+    transform: translateY(0%);
+  }
+  .btn-roll__row--second {
+    position: absolute;
+    inset: 0;
+    transform: translateY(100%);
+  }
+  .btn-roll:hover .btn-roll__row--first {
+    transform: translateY(-100%);
+  }
+  .btn-roll:hover .btn-roll__row--second {
+    transform: translateY(0%);
   }
 }
 

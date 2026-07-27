@@ -13,9 +13,9 @@ interface ButtonRollProps {
 }
 
 // Pill button, 18px Poppins (design.md §7). Every variant shares a fixed
-// h-14 row height so the doubled label/arrow track (design.md §8) clips to
-// a single row until hover — overflow only hides the duplicate when the
-// outer box is exactly one row tall.
+// h-14 row height — the two label rows are absolutely stacked inside it
+// (see .btn-roll__row in tokens.css), so the height must match exactly for
+// the resting/hover positions to line up.
 const variantClasses: Record<Variant, string> = {
   primary: "bg-primary px-8 text-white",
   light: "bg-primary-100 px-8 text-primary",
@@ -55,10 +55,11 @@ function ArrowIcon({ variant }: { variant: Variant }) {
   );
 }
 
-// Text-roll CTA (design.md §8): label + arrow are doubled in the DOM and the
-// whole track slides up on hover, revealing the duplicate. Mechanics live in
-// the `.btn-roll` / `.btn-roll__inner` classes (tokens.css); this component
-// just supplies the two identical rows.
+// Text-roll CTA (design.md §8): label + arrow are doubled in the DOM as two
+// absolutely-stacked rows; hover slides both up, swapping which is visible.
+// Mechanics live in the `.btn-roll` / `.btn-roll__row` classes (tokens.css);
+// this component just supplies the row content and a whitespace-nowrap
+// label so the row can never wrap mid-text and break the clip.
 export function ButtonRoll({
   children,
   href,
@@ -67,19 +68,18 @@ export function ButtonRoll({
   className = "",
   onClick,
 }: ButtonRollProps) {
-  const rowClasses = "flex h-14 items-center justify-center gap-2 text-body-lg";
-  const row = (
-    <span className={rowClasses}>
-      {children}
+  const rowContent = (
+    <>
+      <span className="whitespace-nowrap">{children}</span>
       {showArrow && <ArrowIcon variant={variant} />}
-    </span>
+    </>
   );
 
-  const classes = `btn-roll h-14 font-sans ${variantClasses[variant]} ${className}`;
+  const classes = `btn-roll h-14 whitespace-nowrap font-sans text-body-lg ${variantClasses[variant]} ${className}`;
   const inner = (
     <span className="btn-roll__inner">
-      {row}
-      {row}
+      <span className="btn-roll__row btn-roll__row--first">{rowContent}</span>
+      <span className="btn-roll__row btn-roll__row--second">{rowContent}</span>
     </span>
   );
 
