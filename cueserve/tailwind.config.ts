@@ -64,6 +64,10 @@ const config: Config = {
         // Headings — Instrument Sans; Body — Poppins (see design.md decision).
         display: ["var(--font-display)", "system-ui", "sans-serif"],
         sans: ["var(--font-body)", "system-ui", "sans-serif"],
+        // UI chrome (nav + buttons), oversized wordmark, and stat unit glyphs.
+        ui: ["var(--font-ui)", "system-ui", "sans-serif"],
+        wordmark: ["var(--font-wordmark)", "system-ui", "sans-serif"],
+        mono: ["var(--font-mono)", "ui-monospace", "monospace"],
       },
       fontSize: {
         // Heading ramp (Arooth): H1 64 → H6 22. Fluid via clamp for large sizes.

@@ -10,7 +10,7 @@ export function FooterCta() {
     <Section className="bg-white text-center">
       <Container>
         <Reveal className="flex flex-col items-center gap-10">
-          <h2 className="text-[2.5rem] leading-[0.95] text-ink sm:text-mega">
+          <h2 className="text-[clamp(1.75rem,8vw,7.25rem)] leading-[0.95] text-ink">
             PR<span aria-hidden="true">O</span>JECT IN{" "}
             <span className="font-light italic text-primary">MIND?</span>
           </h2>

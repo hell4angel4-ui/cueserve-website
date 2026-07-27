@@ -62,7 +62,8 @@ export function StatOdometer({
       {digits.map((digit, i) => (
         <DigitColumn key={i} digit={digit} inView={inView} />
       ))}
-      {suffix}
+      {/* Unit glyph is set in mono on the reference build. */}
+      {suffix && <span className="font-mono">{suffix}</span>}
     </span>
   );
 }

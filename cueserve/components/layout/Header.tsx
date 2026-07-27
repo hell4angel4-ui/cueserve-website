@@ -25,7 +25,7 @@ export function Header() {
               <Link
                 key={label}
                 href="#"
-                className={`rounded-pill px-4 py-2 text-body text-ink transition-colors hover:text-primary ${
+                className={`rounded-pill px-4 py-2 font-ui text-body text-ink transition-colors hover:text-primary ${
                   i === 0 ? "bg-primary-100 text-primary" : ""
                 }`}
               >

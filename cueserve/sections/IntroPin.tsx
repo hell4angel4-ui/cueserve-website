@@ -10,14 +10,8 @@ if (typeof window !== "undefined") {
   gsap.registerPlugin(ScrollTrigger);
 }
 
-const LETTERS = [
-  { src: "/letter-v.svg", width: 187, height: 224, alt: "V" },
-  { src: "/letter-i.svg", width: 43, height: 224, alt: "I" },
-  { src: "/letter-s.svg", width: 173, height: 232, alt: "S" },
-  { src: "/letter-i.svg", width: 43, height: 224, alt: "I" },
-];
-const LETTER_N = { src: "/letter-n.svg", width: 173, height: 224, alt: "N" };
-const LETTER_HEIGHT = "h-[clamp(2.75rem,13vw,9rem)]";
+// Wordmark scale — clamped so it never overflows narrow viewports.
+const LETTER_SIZE = "text-[clamp(3rem,15vw,15.2rem)]";
 
 // Pinned 3-frame scroll intro — cross-checked against the colleague's build,
 // which pins the viewport with GSAP ScrollTrigger and morphs between three
@@ -74,14 +68,12 @@ export function IntroPin() {
           ref={frame1Ref}
           className="absolute inset-0 flex flex-col items-center justify-center gap-8 px-6 text-center"
         >
-          <Image
-            src="/letter-v.svg"
-            alt=""
-            width={187}
-            height={224}
-            priority
-            className="h-[clamp(4rem,20vw,14rem)] w-auto"
-          />
+          <span
+            aria-hidden="true"
+            className={`font-wordmark font-bold leading-none text-primary ${LETTER_SIZE}`}
+          >
+            V
+          </span>
           <p className="max-w-xl text-body-lg text-ink">
             At CueServe, we blend AI innovation with engineering precision to build digital
             experiences that transform enterprises. From crafting intelligent workflows to
@@ -113,33 +105,23 @@ export function IntroPin() {
         </div>
 
         <div ref={frame3Ref} className="absolute inset-0 flex flex-col items-center justify-center gap-10 px-6">
-          <div className={`flex w-full max-w-5xl items-stretch justify-between ${LETTER_HEIGHT}`}>
-            {LETTERS.map((letter, i) => (
-              <Image
-                key={i}
-                src={letter.src}
-                alt={letter.alt}
-                width={letter.width}
-                height={letter.height}
-                className="h-full w-auto"
-              />
-            ))}
-            <div className="relative mx-[1vw] flex-[1.7] overflow-hidden rounded-pill">
+          {/* Wordmark is live Space Grotesk text (as on the reference build),
+              not SVG letterforms — the photo replaces the "O". */}
+          <div
+            aria-label="VISION"
+            className={`flex w-full max-w-5xl items-center justify-between font-wordmark font-bold leading-none text-primary ${LETTER_SIZE}`}
+          >
+            <span aria-hidden="true">VISI</span>
+            <span className="relative mx-[1vw] h-[0.72em] flex-1 overflow-hidden rounded-pill">
               <Image
                 src="/hero_men.png"
-                alt="Cueserve"
+                alt=""
                 fill
                 sizes="(max-width: 768px) 60vw, 30vw"
                 className="object-cover"
               />
-            </div>
-            <Image
-              src={LETTER_N.src}
-              alt={LETTER_N.alt}
-              width={LETTER_N.width}
-              height={LETTER_N.height}
-              className="h-full w-auto"
-            />
+            </span>
+            <span aria-hidden="true">N</span>
           </div>
           <p className="max-w-lg text-center text-body-lg text-ink">
             We blend creativity with strategy to build digital experiences that move brands

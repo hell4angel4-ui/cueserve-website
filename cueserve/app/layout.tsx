@@ -3,7 +3,7 @@
 // Instrument Sans -> headings (--font-display); Poppins -> body (--font-body).
 
 import type { Metadata } from "next";
-import { Instrument_Sans, Poppins } from "next/font/google";
+import { DM_Sans, Instrument_Sans, JetBrains_Mono, Poppins, Space_Grotesk } from "next/font/google";
 import { MotionProvider } from "@/components/motion/MotionProvider";
 import "./globals.css";
 
@@ -23,6 +23,32 @@ const poppins = Poppins({
   display: "swap",
 });
 
+// UI text — nav links and button labels (reference build uses DM Sans here,
+// not Poppins).
+const dmSans = DM_Sans({
+  subsets: ["latin"],
+  weight: ["400", "500"],
+  variable: "--font-ui",
+  display: "swap",
+});
+
+// The oversized VISION wordmark is set in Space Grotesk on the reference
+// build (rendered as live text, not SVG letterforms).
+const spaceGrotesk = Space_Grotesk({
+  subsets: ["latin"],
+  weight: ["500", "700"],
+  variable: "--font-wordmark",
+  display: "swap",
+});
+
+// Used for the "%" / unit glyphs beside stat numerals.
+const jetbrainsMono = JetBrains_Mono({
+  subsets: ["latin"],
+  weight: ["400"],
+  variable: "--font-mono",
+  display: "swap",
+});
+
 export const metadata: Metadata = {
   title: "Cueserve — Crafting Modern Vision For Ambitious Brands",
   description:
@@ -35,7 +61,10 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="en" className={`${instrumentSans.variable} ${poppins.variable}`}>
+    <html
+      lang="en"
+      className={`${instrumentSans.variable} ${poppins.variable} ${dmSans.variable} ${spaceGrotesk.variable} ${jetbrainsMono.variable}`}
+    >
       <body>
         <MotionProvider>{children}</MotionProvider>
       </body>

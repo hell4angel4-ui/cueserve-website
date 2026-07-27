@@ -82,7 +82,7 @@ export function ButtonRoll({
   const chars = Array.from(children);
 
   const classes = [
-    "group relative inline-flex shrink-0 items-center gap-2 rounded-pill font-sans",
+    "group relative inline-flex shrink-0 items-center gap-2 rounded-pill font-ui",
     "text-[13px] md:text-[16px] transition-all duration-300 md:gap-3",
     showArrow ? "py-1 pl-4 pr-1 md:py-1.5 md:pl-6 md:pr-1.5" : "px-4 py-2 md:px-6",
     variantClasses[variant],
