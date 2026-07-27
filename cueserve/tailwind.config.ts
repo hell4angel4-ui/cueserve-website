@@ -31,15 +31,23 @@ const config: Config = {
           DEFAULT: "#0040C1",
           50: "#EFF4FF",
           100: "#D1E0FF",
-          400: "#6199FF",
+          200: "#C2E0FF",
+          400: "#256DFF",
           500: "#2970FF",
           600: "#0042C5",
           700: "#00359E",
         },
-        // Ink + grays
-        ink: "#111827",
+        // Ink + grays. `ink` matches the reference build (#090909); design.md
+        // specifies #111827, kept available as ink-900.
+        ink: {
+          DEFAULT: "#090909",
+          900: "#111827",
+        },
         muted: "#4B5563", // secondary body
         subtle: "#6B7280", // captions / hints
+        neutral: {
+          100: "#F9F9F9",
+        },
         // Surfaces
         surface: {
           blue: "#F5FAFF",
@@ -49,7 +57,8 @@ const config: Config = {
         sky: "#2384C6",
         navy: "#0C385A",
         cream: "#FFF3D1",
-        line: "#EBEBEB",
+        // Reference build uses blue-tinted borders, not neutral grey.
+        line: "#D1E0FF",
       },
       fontFamily: {
         // Headings — Instrument Sans; Body — Poppins (see design.md decision).
@@ -114,6 +123,10 @@ const config: Config = {
         marquee: "marquee 30s linear infinite",
         "marquee-fast": "marquee 20s linear infinite",
         "fade-rise": "fade-rise 0.6s ease-out both",
+        // Decorative float loops (reference build timings).
+        "float-a": "cs-float-a 4s ease-in-out infinite",
+        "float-b": "cs-float-b 5s ease-in-out infinite",
+        "float-c": "cs-float-c 4.5s ease-in-out infinite",
       },
       transitionTimingFunction: {
         // House easings (design.md)

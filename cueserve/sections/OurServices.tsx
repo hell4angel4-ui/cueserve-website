@@ -5,17 +5,33 @@ import { AnimatePresence, motion } from "framer-motion";
 import { Container } from "@/components/layout/Container";
 import { Section } from "@/components/layout/Section";
 import { Heading } from "@/components/layout/Heading";
+import Image from "next/image";
 import { ButtonRoll } from "@/components/ui/ButtonRoll";
-import { PlaceholderImage } from "@/components/ui/PlaceholderImage";
 import { Reveal, RevealItem } from "@/components/motion/Reveal";
 
 // Each service gets its own capability tags — a shared array here was a
 // real mistake (identical tags on every row regardless of service).
 const SERVICES = [
-  { title: "Brand Identity", tags: ["Logo Design", "Guidelines", "Color Strategy", "Art Direction", "Packaging"] },
-  { title: "UI/UX Strategy", tags: ["User Research", "Wireframing", "Prototyping", "Usability Testing"] },
-  { title: "Digital Marketing", tags: ["SEO", "Content Strategy", "Social Media", "PPC Campaigns"] },
-  { title: "Product Design", tags: ["3D Modeling", "Industrial Design", "Concepting"] },
+  {
+    title: "Brand Identity",
+    image: "/service-photo-brand.png",
+    tags: ["Logo Design", "Guidelines", "Color Strategy", "Art Direction", "Packaging"],
+  },
+  {
+    title: "UI/UX Strategy",
+    image: "/service-icon-ui.png",
+    tags: ["User Research", "Wireframing", "Prototyping", "Usability Testing"],
+  },
+  {
+    title: "Digital Marketing",
+    image: "/service-icon-pen.png",
+    tags: ["SEO", "Content Strategy", "Social Media", "PPC Campaigns"],
+  },
+  {
+    title: "Product Design",
+    image: "/tech_logo.png",
+    tags: ["3D Modeling", "Industrial Design", "Concepting"],
+  },
 ];
 
 // Our Services (design.md §6.7, Figma node 79:230). Hovering a row reveals
@@ -55,7 +71,13 @@ export function OurServices() {
                     transition={{ duration: 0.35, ease: [0.4, 0, 0.2, 1] }}
                     className="hidden overflow-hidden rounded-media md:block"
                   >
-                    <PlaceholderImage label={`${service.title} — placeholder`} className="h-16 w-24" />
+                    <Image
+                      src={service.image}
+                      alt=""
+                      width={96}
+                      height={64}
+                      className="h-16 w-24 object-cover"
+                    />
                   </motion.div>
                 )}
               </AnimatePresence>

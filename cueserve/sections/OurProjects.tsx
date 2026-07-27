@@ -4,8 +4,8 @@ import { useState } from "react";
 import { AnimatePresence, motion } from "framer-motion";
 import { Section } from "@/components/layout/Section";
 import { Heading } from "@/components/layout/Heading";
+import Image from "next/image";
 import { ButtonRoll } from "@/components/ui/ButtonRoll";
-import { PlaceholderImage } from "@/components/ui/PlaceholderImage";
 import { Reveal, RevealItem } from "@/components/motion/Reveal";
 
 const PROJECTS = ["Pixel Forge", "Studio Nova", "Brand Orbit", "Vision Core", "Design Flow"];
@@ -57,7 +57,7 @@ export function OurProjects() {
                     transition={{ duration: 0.3, ease: [0.22, 1, 0.36, 1] }}
                     className="pointer-events-none absolute right-24 top-1/2 hidden h-24 w-36 -translate-y-1/2 overflow-hidden rounded-media md:block"
                   >
-                    <PlaceholderImage label={`${name} — project placeholder`} className="h-full w-full" />
+                    <Image src="/project.png" alt="" fill sizes="144px" className="object-cover" />
                   </motion.div>
                 )}
               </AnimatePresence>

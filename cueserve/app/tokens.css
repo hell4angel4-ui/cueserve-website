@@ -7,17 +7,22 @@
 
 @layer base {
   :root {
-    /* --- Brand blue ramp --- */
+    /* --- Brand blue ramp (values taken from the reference build) --- */
     --primary: #0040c1;
     --primary-50: #eff4ff;
     --primary-100: #d1e0ff;
-    --primary-400: #6199ff;
+    --primary-200: #c2e0ff;
+    --primary-400: #256dff;
     --primary-500: #2970ff;
     --primary-600: #0042c5;
     --primary-700: #00359e;
 
-    /* --- Ink + grays --- */
-    --ink: #111827;
+    /* --- Ink + grays ---
+       NOTE: the reference build uses #090909 for primary text, not the
+       #111827 design.md specifies. Matching the reference here; #111827 is
+       kept as --ink-900 in case the design.md value is preferred later. */
+    --ink: #090909;
+    --ink-900: #111827;
     --muted: #4b5563;
     --subtle: #6b7280;
     --white: #ffffff;
@@ -25,12 +30,14 @@
     /* --- Surfaces --- */
     --surface-blue: #f5faff;
     --surface-blue-2: #eff4ff;
+    --surface-subtle: #f9f9f9;
 
     /* --- Accents --- */
     --sky: #2384c6;
     --navy: #0c385a;
     --cream: #fff3d1;
-    --line: #ebebeb;
+    /* Reference build borders are blue-tinted, not neutral grey. */
+    --line: #d1e0ff;
 
     /* --- Gradients --- */
     --gradient-brand: linear-gradient(135deg, #0136a2 0%, #266dfb 100%);
@@ -116,52 +123,26 @@
     animation-play-state: paused;
   }
 
-  /* Text-roll button: the first row stays in normal flow (so it sets the
-     button's actual size from its content); the second row is an absolute
-     overlay sitting one row-height below, clipped out by .btn-roll's
-     overflow. Hover slides both up, swapping which is visible.
-     Markup:
-     <a class="btn-roll"><span class="btn-roll__inner">
-       <span class="btn-roll__row btn-roll__row--first">...</span>
-       <span class="btn-roll__row btn-roll__row--second">...</span>
-     </span></a> */
-  .btn-roll {
-    position: relative;
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    overflow: hidden;
-    border-radius: var(--radius-pill);
-  }
-  .btn-roll__inner {
-    position: relative;
-    display: block;
-  }
-  .btn-roll__row {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: 0.5rem;
-    transition: transform var(--dur-micro) var(--ease-entrance);
-  }
-  .btn-roll__row--first {
-    position: relative;
-    transform: translateY(0%);
-  }
-  .btn-roll__row--second {
-    position: absolute;
-    inset: 0;
-    transform: translateY(100%);
-  }
-  .btn-roll:hover .btn-roll__row--first {
-    transform: translateY(-100%);
-  }
-  .btn-roll:hover .btn-roll__row--second {
-    transform: translateY(0%);
-  }
+  /* The text-roll button is now built per-character in ButtonRoll.tsx
+     (Tailwind utilities + a 18ms transition-delay per character), matching
+     the reference build — the old whole-row .btn-roll CSS is gone. */
 }
 
 @keyframes marquee {
   from { transform: translateX(0); }
   to { transform: translateX(-50%); }
+}
+
+/* Decorative float loops for accent chips/pills/metrics (reference build). */
+@keyframes cs-float-a {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-8px); }
+}
+@keyframes cs-float-b {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-12px); }
+}
+@keyframes cs-float-c {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-6px); }
 }

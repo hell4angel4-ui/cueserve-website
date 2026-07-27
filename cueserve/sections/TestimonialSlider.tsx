@@ -1,6 +1,7 @@
 "use client";
 
 import { useCallback, useEffect, useState } from "react";
+import Image from "next/image";
 import useEmblaCarousel from "embla-carousel-react";
 import { Container } from "@/components/layout/Container";
 import { Section } from "@/components/layout/Section";
@@ -11,18 +12,21 @@ import { Reveal, RevealItem } from "@/components/motion/Reveal";
 const TESTIMONIALS = [
   {
     quote:
-      "Working with Cueserve was a seamless experience from start to finish. Their team truly understood our vision and brought it to life through a stunning digital identity. The results exceeded our expectations.",
-    name: "Emma Johnson",
+      "If you want your job to be done professionally and on time, I highly recommend Team Cueserve. Very professional and will hire again in my future projects. Job well done. Thank you.",
+    name: "Lindel Wabhembe",
+    avatar: "/testimonial/client.jpg",
   },
   {
     quote:
       "The team's attention to detail and strategic thinking transformed our brand. Every milestone was delivered on time, and the final product spoke for itself.",
     name: "Daniel Cho",
+    avatar: "/testimonial/client.jpg",
   },
   {
     quote:
       "From the first call to launch day, Cueserve felt like an extension of our own team. Communication was effortless and the craft was exceptional.",
     name: "Priya Nair",
+    avatar: "/testimonial/client.jpg",
   },
 ];
 
@@ -100,8 +104,24 @@ export function TestimonialSlider() {
             <div className="flex">
               {TESTIMONIALS.map((t, i) => (
                 <div key={t.name} className="min-w-0 flex-[0_0_100%] px-1" aria-hidden={selected !== i}>
-                  <p className="max-w-3xl text-[1.75rem] font-light text-ink">&ldquo;{t.quote}&rdquo;</p>
-                  <p className="mt-4 font-display text-[1.5rem] italic text-primary">{t.name}</p>
+                  <Image
+                    src="/testimonial/quote-icon.png"
+                    alt=""
+                    width={48}
+                    height={48}
+                    className="mb-6 h-10 w-auto"
+                  />
+                  <p className="max-w-3xl text-[1.75rem] font-light text-ink">{t.quote}</p>
+                  <div className="mt-6 flex items-center gap-4">
+                    <Image
+                      src={t.avatar}
+                      alt=""
+                      width={56}
+                      height={56}
+                      className="h-14 w-14 rounded-full object-cover"
+                    />
+                    <p className="font-display text-[1.5rem] italic text-primary">{t.name}</p>
+                  </div>
                 </div>
               ))}
             </div>

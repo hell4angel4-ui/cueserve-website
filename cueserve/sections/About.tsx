@@ -3,7 +3,6 @@ import { Section } from "@/components/layout/Section";
 import { Eyebrow } from "@/components/layout/Eyebrow";
 import { ButtonRoll } from "@/components/ui/ButtonRoll";
 import { StatOdometer } from "@/components/ui/StatOdometer";
-import { PlaceholderImage } from "@/components/ui/PlaceholderImage";
 import { Reveal } from "@/components/motion/Reveal";
 
 // About / Projects-done (design.md §6.4, Figma node 52:280). The 250+ stat
@@ -14,19 +13,15 @@ export function About() {
     <Section>
       <Container className="grid grid-cols-1 items-center gap-12 md:grid-cols-2">
         <Reveal className="relative">
-          <PlaceholderImage
-            label="About — autoplaying video placeholder"
-            className="aspect-square w-full rounded-card"
+          {/* Autoplaying muted loop (design.md §8 About motion spec). */}
+          <video
+            src="/video1.mp4"
+            autoPlay
+            muted
+            loop
+            playsInline
+            className="aspect-square w-full rounded-card object-cover"
           />
-          <button
-            type="button"
-            aria-label="Play video"
-            className="absolute inset-0 m-auto flex h-16 w-16 items-center justify-center rounded-full bg-white/90 text-primary shadow-card"
-          >
-            <svg width="20" height="20" viewBox="0 0 16 16" fill="currentColor" aria-hidden="true">
-              <path d="M4 2.5v11l9-5.5-9-5.5Z" />
-            </svg>
-          </button>
         </Reveal>
 
         <Reveal className="flex flex-col items-start gap-4">

@@ -126,7 +126,7 @@ export function IntroPin() {
             ))}
             <div className="relative mx-[1vw] flex-[1.7] overflow-hidden rounded-pill">
               <Image
-                src="/vision-portrait.jpg"
+                src="/hero_men.png"
                 alt="Cueserve"
                 fill
                 sizes="(max-width: 768px) 60vw, 30vw"
